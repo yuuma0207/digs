@@ -1,12 +1,13 @@
-# Diffusive Gibbs Sampling (DiGS)
+# Diffusive Gibbs Sampling (DiGS, ICML 2024)
 
 <div align="center">
 
-[![Paper](http://img.shields.io/badge/paper-arxiv.2402.03008-B31B1B.svg)](https://arxiv.org/abs/2402.03008)
+[![Paper](https://img.shields.io/badge/paper-arxiv.2402.03008-red)](https://arxiv.org/abs/2402.03008)
+[![Paper](https://img.shields.io/badge/ICML-2024-blue)](https://proceedings.mlr.press/v235/chen24be.html)
 
 </div>
 
-This is the official PyTorch implementation of `Diffusive Gibbs Sampler (DiGS)`, proposed in the paper _Diffusive Gibbs Sampling_ (published at ICML 2024). Please read our paper [[arXiv](https://arxiv.org/abs/2402.03008)] for detailed descriptions of the proposed DiGS method. 
+This is the official PyTorch implementation of `Diffusive Gibbs Sampler (DiGS)`, proposed in the paper _Diffusive Gibbs Sampling_ (published at ICML 2024). Please read our paper [[arXiv](https://arxiv.org/abs/2402.03008), [ICML 2024](https://proceedings.mlr.press/v235/chen24be.html)] for detailed descriptions of the proposed DiGS method. 
 
 If you find our paper, code, and/or raw result data useful for your research, please consider citing our paper:
 
