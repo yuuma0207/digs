@@ -13,7 +13,7 @@ from utils import GMM, quadratic_function, MC_estimate_true_expectation, relativ
 from mmd import MMD_loss
 
 device = torch.device("cpu")
-torch.set_default_tensor_type('torch.FloatTensor')
+torch.set_default_dtype(torch.float32)
 
 dim = 2
 n_mixes = 40
@@ -21,7 +21,7 @@ loc_scaling = 40.0 # scale of the problem (changes how far apart the modes of ea
 log_var_scaling = 1.0 # variance of each Gaussian
 
 torch.manual_seed(0) # seed of 0 for GMM problem
-target = GMM(dim=dim, n_mixex=n_mixes, 
+target = GMM(dim=dim, n_mixes=n_mixes, 
              loc_scaling=loc_scaling, log_var_scaling=log_var_scaling,
              device=device)
 
@@ -33,7 +33,7 @@ n_samples = int(1e4)
 true_samples = target.sample([n_samples])
 plot_contours(target.log_prob, samples=true_samples.cpu().numpy(),
               bounds=plotting_bounds, n_contour_levels=50, grid_width_n_points=200,
-              device=device, plt_show=False)
+              device=device, plt_show=True)
 
 true_expectation = MC_estimate_true_expectation(true_samples.cpu(), quadratic_function)
 print("True expectation: ", true_expectation.cpu().numpy())
