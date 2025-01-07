@@ -12,12 +12,13 @@ class GMM(torch.nn.Module):
         self.n_mixes = n_mixes
         self.dim = dim
         self.n_test_set_samples = n_test_set_samples
-
+        # n_mix個のガウス分布の平均（中心位置）と標準偏差の対数をランダムに作っている。
         mean = (torch.rand((n_mixes, dim)) - 0.5)*2 * loc_scaling
         log_var = torch.ones((n_mixes, dim)) * log_var_scaling
-
-        self.register_buffer("cat_probs", torch.ones(n_mixes))
+        # 学習可能ではないが、モデルのパラメータとして扱うためにregister_bufferを使っている。
+        self.register_buffer("cat_probs", torch.ones(n_mixes)) # カテゴリ分布の確率：各成分が選ばれる確率（今回はすべて等しい？）
         self.register_buffer("locs", mean)
+        # 分散共分散行列の対角成分のみを使っている。
         self.register_buffer("scale_trils", torch.diag_embed(torch.nn.functional.softplus(log_var)))
         self.device = device
         self.to(self.device)
@@ -31,7 +32,9 @@ class GMM(torch.nn.Module):
 
     @property
     def distribution(self):
+        # カテゴリ分布：各成分が選ばれる確率
         mix = torch.distributions.Categorical(self.cat_probs.to(self.device))
+        # 各カテゴリに属する多変量ガウス分布を定義している。
         com = torch.distributions.MultivariateNormal(self.locs.to(self.device),
                                                      scale_tril=self.scale_trils.to(self.device),
                                                      validate_args=False)
@@ -46,7 +49,7 @@ class GMM(torch.nn.Module):
     def log_prob(self, x: torch.Tensor):
         log_prob = self.distribution.log_prob(x)
         mask = torch.zeros_like(log_prob)
-        mask[log_prob < -1e4] = - torch.tensor(float("inf"))
+        mask[log_prob < -1e4] = - torch.tensor(float("inf")) # ここはなぜこのしきい値にしているか？-1e4以下はどれくらいの確率になるのか？
         log_prob = log_prob + mask
         return log_prob
 
