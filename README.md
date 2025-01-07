@@ -11,7 +11,7 @@ This is the official PyTorch implementation of `Diffusive Gibbs Sampler (DiGS)`,
 
 If you find our paper, code, and/or raw result data useful for your research, please consider citing our paper:
 
-```
+```bibtex
 @inproceedings{chen2024diffusive,
   title={Diffusive Gibbs Sampling},
   author={Chen, Wenlin and Zhang, Mingtian and Paige, Brooks and Hern{\'a}ndez-Lobato, Jos{\'e} Miguel and Barber, David},
@@ -20,5 +20,3 @@ If you find our paper, code, and/or raw result data useful for your research, pl
   organization={PMLR}
 }
 ```
-
-## My change
